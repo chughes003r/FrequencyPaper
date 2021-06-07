@@ -348,11 +348,11 @@ for group = 1:length(groups) %elec = unique(chans) %
 end
 if aggregate && mode == 1
     legend(subset, [{'Intermediate Frequency Preferring'}, {'Low Frequency Preferring'}, {'High Frequency Preferring'}], 'Location', 'northeastoutside')
-    print('All median trends', '-dpng')
+    %print('All median trends', '-dpng')
 elseif aggregate && mode == 2
-    print('All median trends amplitude', '-dpng')
+    %print('All median trends amplitude', '-dpng')
 elseif aggregate && mode == 3
-    print('All median trends duration', '-dpng')
+    %print('All median trends duration', '-dpng')
 end
 end
 

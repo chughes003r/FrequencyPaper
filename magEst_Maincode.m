@@ -1,38 +1,14 @@
 dbstop if error
 %% User inputs
 %Enter the desired paradigm:
-%all = all experiments done with freq range 20-300 Hz - would never use
-%this for normal analysis because it combines a lot of different variations
-%in the paradigm
 %norm = the basic paradigm (1-s train duration) used for paper figures
-%long = 3-s train durations
-%low = low amplitudes
 %amp = amplitude estimation
 %dur = train duration estimation
-%new = 2019 data
-
-%add path of relevant functions - will need to modify this based on where
-%you save the code
-addpath(genpath('C:\Users\clh180\Desktop\eLife Paper code and data\Code'))
 
 %specify if you want to save images and where images should be saved
-print_imgs = true;
+print_imgs = false; %can change if you want to save images to folder
 
-%have user select folder for loading data
-disp('Please select the folder to load data from')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-load_directory = selpath;
-
-%have user select folder for saving figures
-disp('Please select the folder to save figures to')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-save_directory = selpath;
-
-style = inputdialog({'norm', 'long', 'low', 'amp', 'dur', 'new'}, 'Please select the trial type');
+style = inputdialog({'norm', 'amp', 'dur'}, 'Please select the trial type');
 
 % 'true' if you want data to be normalized within days; 'false' otherwise
 % we used normalization for amplitude and train duration plots but not for
@@ -108,18 +84,9 @@ else
     end
 end
 
-stats_input = inputdialog({'Yes', 'No'}, 'Do you want to do stats?');
-if strcmp(stats_input, 'Yes')
-    do_stats = true;
-else
-    do_stats = false;
-end
-
 %% Compile Magnitude Estimation Data
 if ~exist('allLT') %don't need it to do this if it is already in workspace
-    cd(load_directory)
     load('consolidatedMagEst.mat');
-    cd(save_directory)
     for i = 1:length(metamagdata)
         mag_check(i) = ~isempty(metamagdata(i).reportedData.magnitude);
     end
@@ -363,28 +330,26 @@ end
 
 [resps_org, peak_param, resps_org_2, resps_avg, coeffs, max_intensities, resps_org_3, val] = magEst_responses(resps, params, groups, chans, allLTsessions, allLTsets, master_idx, grouping, print_imgs, error_bars, mode, aggregate, fit_type, elecs_int);
  
-%% STATS stuff
+%% STATS stuff - don't make sense for aggregated data
 
-if do_stats
-    %check for normality
-    %most channels have at least one residual that is not normal - use
-    %nonparametric tests
-    for i = 1:size(resps_org_3,2)
-        for j = 1:size(resps_org_3{1,i},2)
-            [ad_h(i,j), ad_results(i,j)] = adtest(resps_org_3{1,i}(:,j));
-        end
+%check for normality
+%most channels have at least one residual that is not normal - use
+%nonparametric tests
+for i = 1:size(resps_org_3,2)
+    for j = 1:size(resps_org_3{1,i},2)
+        [ad_h(i,j), ad_results(i,j)] = adtest(resps_org_3{1,i}(:,j));
     end
+end
 
-    %check for homoscedasticity
-    for i = 1:size(resps_org_3,2)
-        var_results(i) = vartestn(resps_org_3{1,i});
-    end
+%check for homoscedasticity
+for i = 1:size(resps_org_3,2)
+    var_results(i) = vartestn(resps_org_3{1,i}, 'Display', 'off');
+end
 
-    %perform friedman for nonparametric and repeated measures
-    clear p tbl stats c
-    for i = 1:length(resps_org_3)
-        [p(i) tbl{i} stats{i}] = friedman(resps_org_3{i}, size(resps_org_3{i},1)/5);
-    end
+%perform friedman for nonparametric and repeated measures
+clear p tbl stats c
+for i = 1:length(resps_org_3)
+    [p(i) tbl{i} stats{i}] = friedman(resps_org_3{i}, size(resps_org_3{i},1)/5, 'off');
 end
 
 

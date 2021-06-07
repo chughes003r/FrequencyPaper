@@ -1,7 +1,6 @@
 %magnitude estimation freq and amp
-clear all
-close all
-load('C:\Users\clh180\Desktop\eLife Paper code and data\Data\AmpandFreq_data.mat')
+load('AmpandFreq_data.mat');
+
 %might want to just write in all test sessions and sets at some point
 sessions = [181, 183, 185, 191, 193, 52, 195, 54, 198, 201, 204]; 
 %the amplitudes might contain 20 or 30 - try to check what happens at these

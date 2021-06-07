@@ -1,27 +1,4 @@
 %code for detection at different frequencies
-
-%add path of relevant functions - will need to modify this based on where
-%you save the code
-addpath(genpath('C:\Users\clh180\Desktop\eLife Paper code and data\Code'))
-
-%specify if you want to save images and where images should be saved
-print_imgs = true;
-
-%have user select folder for loading data
-disp('Please select the folder to load data from')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-load_directory = selpath;
-
-%have user select folder for saving figures
-disp('Please select the folder to save figures to')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-save_directory = selpath;
-
-cd(load_directory)
 load('allData_detection')
 
 %% calculate success for each frequency on each tested electrode
@@ -79,7 +56,6 @@ ax.XTick = [1,2,3];
 ax.XTickLabel = [{'20 Hz'}, {'100 Hz'}, {'300 Hz'}];
 yline(50, 'r--')
 axis square
-print('Detection', '-dpng')
 
 %% Stats
 %anova with multiple comparisons to compare outcome for each frequency

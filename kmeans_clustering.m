@@ -1,28 +1,6 @@
 %k-means clustering
 
-%add path of relevant functions - will need to modify this based on where
-%you save the code
-addpath(genpath('C:\Users\clh180\Desktop\eLife Paper code and data\Code'))
-
-%specify if you want to save images and where images should be saved
-print_imgs = true;
-
-%have user select folder for loading data
-disp('Please select the folder to load data from')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-load_directory = selpath;
-
-%have user select folder for saving figures
-disp('Please select the folder to save figures to')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-save_directory = selpath;
-
 %have user select which participant's data they want to plot
-cd(load_directory)
 participant = inputdialog({'CRS02b', 'CRS07'}, 'Please select the desired participant');
 if strcmp(participant, 'CRS02b')
     load('all_resps_notnorm.mat') %all intensity responses

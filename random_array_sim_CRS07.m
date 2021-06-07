@@ -2,7 +2,7 @@
 %have to do each array at a time
 
 %% Calculate actual ratio from data_vector
-load('C:\Users\clh180\Desktop\eLife Paper code and data\Data\CRS07_locations.mat')
+load('CRS07_locations.mat')
 
 data_vector = category_locations;
 
@@ -172,8 +172,7 @@ x = [0:0.01:1];
 y = pdf(pd, x);
 figure
 plot(x,y, 'LineWidth', 2)
-    %vline_lim(ratio_lat,x,y)
-vline(ratio_lat)
+xline(ratio_lat)
 title('Outcome distribution') 
 ylabel('pdf')
 xlabel('Ratio of matching neighbors to total neighbors')

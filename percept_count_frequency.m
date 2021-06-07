@@ -1,5 +1,3 @@
-dbstop if error
-
 % alternative to plot by frequency 
 %code to count reported percepts from comments on surveys
 
@@ -7,9 +5,8 @@ dbstop if error
 
 %% Loading data and initializing variables
 %load in data
-%load('R:\users\clh180\Project data and analysis\Paper Mag Est\channel_percepts')
-load('P:\users\clh180\Project data and analysis\Magnitude Estimation\Qualities\channel_percepts')
-load('P:\users\clh180\Project data and analysis\Magnitude Estimation\Qualities\channel_stim')
+load('channel_percepts.mat')
+load('channel_stim.mat')
 
 %set data of interest
 %these were supposed to only be the ones that were "significantly"
@@ -222,20 +219,6 @@ for quality = 1:size(tbl,2)
     [h(quality), p(quality)] = FisherExactTest(tbl{quality});
 end
 p(p>1) = 1;
+%h will tell you which ones are significant after accounting for multiple
+%comparisons
 h = fdr_bh(p);
-
-%fisher's exact test for post hoc
-for quality = 1:length(tbl)
-    if size(tbl{quality},2) > 1
-        %compare low to int
-        x = table([tbl{quality}(1,1);tbl{quality}(2,1)],[tbl{quality}(1,2);tbl{quality}(2,2)], 'VariableNames', {'Sensation', 'NoSensation'});
-        [h2(1,quality), p2(1,quality), stats{1,quality}] = fishertest(x);
-        %compare low to high
-        x = table([tbl{quality}(1,1);tbl{quality}(3,1)],[tbl{quality}(1,2);tbl{quality}(3,2)], 'VariableNames', {'Sensation', 'NoSensation'});
-        [h2(2,quality), p2(2,quality), stats{2,quality}] = fishertest(x);
-        %compare int to high
-        x = table([tbl{quality}(2,1);tbl{quality}(3,1)],[tbl{quality}(2,2);tbl{quality}(3,2)], 'VariableNames', {'Sensation', 'NoSensation'});
-        [h2(3,quality), p2(3,quality), stats{3,quality}] = fishertest(x);
-    end
-end
-%have to correct for multiple comparisons - probably Benjamani-Hochberg

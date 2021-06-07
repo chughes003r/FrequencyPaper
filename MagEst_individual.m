@@ -1,28 +1,8 @@
 %% Code for single magnitude estimation set
 
-%add path of relevant functions - will need to modify this based on where
-%you save the code
-addpath(genpath('C:\Users\clh180\Desktop\eLife Paper code and data\Code'))
-
 %specify if you want to save images and where images should be saved
-print_imgs = true;
-
-%have user select folder for loading data
-disp('Please select the folder to load data from')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-load_directory = selpath;
-
-%have user select folder for saving figures
-disp('Please select the folder to save figures to')
-dirs = 'C:\Users';
-cd(dirs)
-selpath = uigetdir;
-save_directory = selpath;
 
 %load in data structure with data for all significant channels
-cd(load_directory)
 load('allData_sigChans.mat')
 
 %define the color scheme for the plots
@@ -44,9 +24,9 @@ cidx = 1;
 
 jitters = [0 2 -2 4 -4 6];
 
-figure('OuterPosition',[0 0 1680 1050]);
 for curr_ch = 1:length(unq_chs)
     clear subset labels
+    figure('OuterPosition',[0 0 1680 1050]);
     sess_use = find(channels == unq_chs(curr_ch)); %logical that indicates the relevant sessions to use
     for curr_sess = 1:length(sess_use)
         jitter = jitters(curr_sess);
@@ -83,27 +63,13 @@ for curr_ch = 1:length(unq_chs)
         fill([unq_freqs+jitter, unq_freqs(end:-1:1)+jitter, unq_freqs(1)+jitter],[resp_avg{curr_ch,curr_sess}(:,1)'+est_err, resp_avg{curr_ch,curr_sess}(end:-1:1,1)'-est_err(1,end:-1:1), est_err(1,1)], cb ,'EdgeColor','none');
         alpha(0.25);
 
-        mdl_func = {'exp1', 'exp2', 'poly3', 'poly2', 'poly1'}; 
 
-        for curr_mdl = 1:length(mdl_func)
-            [mdl, f] = non_linear_fit(unq_freqs'+jitter, resp_avg{curr_ch,curr_sess}(:,1),  mdl_func{curr_mdl});
-            AIC(curr_mdl) = mdl.ModelCriterion.AIC;
-        end
-
-        [min_val, des_mdl] = min(AIC);
-
-        [mdl, f] = non_linear_fit(unq_freqs'+jitter,resp_avg{curr_ch,curr_sess}(:,1), mdl_func{des_mdl});
-
-        coeffs{1}= table2array(mdl.Coefficients);
-        coeffs{2} = des_mdl;
-        
         temp = max(resp_avg{curr_ch,curr_sess}(:,1)) + max(resp_avg{curr_ch,curr_sess}(:,2));
         if temp > max_resp
             max_resp = temp;
         end
 
-        x1 = linspace(20, 300, 280); 
-        subset(curr_sess) = plot(x1+jitter, f(coeffs{1}(:,1),x1), 'Color', cb, 'LineWidth', 2);
+        subset(curr_sess) = plot(unq_freqs+jitter, resp_avg{curr_ch,curr_sess}(:,1), 'Color', cb, 'LineWidth', 2);
         labels{curr_sess} = num2str(datenum(date) - datenum('5/04/2015'));
     end
     ax = gca;
@@ -118,9 +84,6 @@ for curr_ch = 1:length(unq_chs)
     axis square
     hold off
     legend(subset, labels)
-    
-    cd(save_directory)
-    print(tit, '-dpng')
 end
 
 %% Stats 
@@ -139,7 +102,9 @@ for curr_ch = 1:length(sig_chans)
                 resps_org_2{curr_freq,curr_ch} = [resps_org_2{curr_freq, curr_ch}, resps_org{ch_chk,curr_sess}(curr_freq,:)'];
             end
         end
-        [p(curr_freq,curr_ch)] = friedman(resps_org_2{curr_freq,curr_ch}, 1);
+        [p(curr_freq,curr_ch)] = friedman(resps_org_2{curr_freq,curr_ch}, 1, 'off');
     end
 end
+%after accounting for multiple comparisons, h will tell you if there are
+%significant differences
 [h crit_p] = fdr_bh(p);

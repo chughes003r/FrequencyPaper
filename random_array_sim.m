@@ -2,7 +2,7 @@
 %have to do each array at a time
 
 %% Calculate actual ratio from data_vector
-load('C:\Users\clh180\Desktop\eLife Paper code and data\Data\category_locations.mat')
+load('category_locations.mat')
 data_vector = category_locations;
 
 %plot heatmaps

@@ -1,15 +1,10 @@
-dbstop if error
-
 %code to count reported percepts from comments on surveys
 
 %this code has to be run for each frequency of surveys separately
 
-%% Loading data and initializing variables
-%load in data
-%load('R:\users\clh180\Project data and analysis\Paper Mag Est\channel_percepts')
-
-load('P:\users\clh180\Project data and analysis\Magnitude Estimation\Qualities\channel_percepts')
-load('P:\users\clh180\Project data and analysis\Magnitude Estimation\Qualities\channel_stim')
+%% Loading data and initializing variables 
+load('channel_percepts.mat')
+load('channel_stim.mat')
 
 %set data of interest
 normalize_input = inputdialog({'20 Hz', '100 Hz', '300 Hz'}, 'Which frequency would you like to plot?');
@@ -160,11 +155,6 @@ low_percepts_sum = nansum(low_percepts, 1);
 mid_percepts_sum = nansum(mid_percepts, 1);
 high_percepts_sum = nansum(high_percepts, 1);
 
-%amount a percept was reported for each group
-% percepts_size{1} = sum(percept_cnt(low));
-% percepts_size{2} = sum(percept_cnt(middle));
-% percepts_size{3} = sum(percept_cnt(high));
-
 %alternative using how many times things were stim'd
 percepts_size{2} = sum(stim_cnt(low));
 percepts_size{1} = sum(stim_cnt(middle));
@@ -174,7 +164,7 @@ percepts_sum = [(mid_percepts_sum/percepts_size{1})', (low_percepts_sum/percepts
 
 %make a spider plot
 figure
-int_percepts = {'Tingle', 'Pressure*', 'Warm', 'Sharp', 'Vibration', 'Buzzing', 'Tapping*',  'Sparkle', 'Touch', 'Prick'};
+int_percepts = {'Tingle', 'Pressure', 'Warm', 'Sharp', 'Vibration', 'Buzzing', 'Tapping',  'Sparkle', 'Touch', 'Prick'};
 %array has to be organized in weird way for this function
 legend_str = {'IFP', 'LFP', 'HFP'};
 spider_plot((percepts_sum)', int_percepts, 10, 2, legend_str)
