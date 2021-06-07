@@ -1,6 +1,6 @@
-# FrequencyPaper
+# Code and data for "Perception of microstimulation frequency in human somatosensory cortex"
 
-#The following is also available as a Word file on the Git
+# The following is also available as a Word file on the Git
 
 All of this code was run in MATLAB 2019b. 
 
@@ -11,6 +11,8 @@ Many of these data sets depend on classes defined within MATLAB. You will need t
 Put all code scripts in the same folder and make sure they are added to your path (so code runs properly with all dependencies).
 
 Note: Figures won’t look exactly as they do in the paper due to post-processing for publication quality (trends should look the same though)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Figure 1, and Supplementary Figures 1 and 2
 
