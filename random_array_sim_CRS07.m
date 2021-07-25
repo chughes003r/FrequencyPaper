@@ -2,12 +2,12 @@
 %have to do each array at a time
 
 %% Calculate actual ratio from data_vector
-load('CRS07_locations.mat')
+load('P3_locations.mat')
 
 data_vector = category_locations;
 
 %plot heatmaps
-plot_spatial_data_blackedOut_frequency_CRS07(data_vector', '')
+plot_spatial_data_blackedOut_frequency_P3(data_vector', '')
 
 %also plot median with SEM
 figure
