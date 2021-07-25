@@ -158,7 +158,7 @@ This code will plot each channel on which data was collected with each session t
 
 When running the code, the user will be asked to specify which folder the data is to be loaded from and which folder the figures are to be saved in. 
 
-Functions used: “MagEst_Individual.m”, “fdr_bh.m” 
+Functions used: “MagEst_Individual.m”
 
 Data needed: allData_sigChans.mat
 
