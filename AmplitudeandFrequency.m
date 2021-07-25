@@ -1,14 +1,6 @@
 %magnitude estimation freq and amp
 load('AmpandFreq_data.mat');
 
-%might want to just write in all test sessions and sets at some point
-sessions = [181, 183, 185, 191, 193, 52, 195, 54, 198, 201, 204]; 
-%the amplitudes might contain 20 or 30 - try to check what happens at these
-%points
-sets = [{[1, 3, 5]}, {[3, 5, 6]}, {[23, 26, 27]}, {[2,4]}, {[2,4]}, {[10, 11, 13, 15]}, {[2]}, {[8]}, {[9, 12]}, {[2]}, {[9, 11]}]; 
-locations = [{'CRS02bLab'}, {'CRS02bLab'}, {'CRS02bLab'}, {'CRS02bLab'}, {'CRS02bLab'}, {'CRS02bHome'}, {'CRS02bLab'}, {'CRS02bHome'}, {'CRS02bLab'}, {'CRS02bLab'}, {'CRS02bLab'}];%{'CRS02bHome'},
-
-
 groups{1} = [2 12 42 49 63]; %low frequency
 groups{2} = [14 16 19 22 26 54 58]; %intermediate
 groups{3} = [3 8 13 20 34 36 41 45]; %high
@@ -22,9 +14,8 @@ intensities_groups{1} = cell(3,3);
 intensities_groups{2} = cell(3,3);
 intensities_groups{3} = cell(3,3);
 chans = cell(1,3);
-for session_num = 1:length(sessions)
-    for set_num = 1:length(sets{session_num}) 
-        location = locations{session_num};
+for session_num = 1:size(data_all,1)
+    for set_num = 1:size(data_all,2) 
         data = data_all{session_num, set_num};
         chan = data(1,1).channel;
         if any(groups{1} == chan)
