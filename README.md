@@ -170,22 +170,22 @@ Supplementary Figure 2a, 4b, and 6
 
 This code will perform and plot the results for each k-means clustering of both intensity values and perceptual values on intensity axes in 3D space.  
 
-When running the code, the user will be asked to specify which folder the data is to be loaded from and which folder the figures are to be saved in. To plot figures 2a and 6, select “CRS02b” as the participant. To plot figure 4b, select “CRS07” as the participant
+When running the code, the user will be asked to specify which folder the data is to be loaded from and which folder the figures are to be saved in. To plot figures 2a and 6, select “P2” as the participant. To plot figure 4b, select “P3” as the participant
 
 Functions used: “k-means_clustering.m”
 
 Data needed (2a and 6): allresponses_notnorm.mat, chans.mat, percept_ch_all.mat
-Data needed (4b): CRS07_respsandchans.mat
+Data needed (4b): P3_respsandchans.mat
 
 Class dependencies: N/A
 
 
 Supplementary Figure 4a and 4c
 
-This code will show the frequency magnitude response plot (4b) and the spatial clustering plots (4c) for participant P3. Simply run “random_array_sim_CRS07” and it will output the plots.
+This code will show the frequency magnitude response plot (4b) and the spatial clustering plots (4c) for participant P3. Simply run “random_array_sim_P3” and it will output the plots.
 
-Functions used: “random_array_sim_CRS07.m,” “plot_spatial_data_blackedOut_frequency_CRS07.m”
-Data needed: CRS07_locations.mat
+Functions used: “random_array_sim_P3.m,” “plot_spatial_data_blackedOut_frequency_P3.m”
+Data needed: P3_locations.mat
 
 Class dependencies: N/A
 
