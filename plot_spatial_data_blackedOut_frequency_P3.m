@@ -1,4 +1,4 @@
-function plot_spatial_data_blackedOut_frequency_CRS07(data_vector, tit, colormapping) 
+function plot_spatial_data_blackedOut_frequency_P3(data_vector, tit, colormapping) 
 % data_vector = values per channel (1x64) 
 % colormapping = 'somatotopic' or 'intensity' 
 %specifically for the frequency preference stuff
