@@ -1,8 +1,8 @@
 %k-means clustering
 
 %have user select which participant's data they want to plot
-participant = inputdialog({'CRS02b', 'CRS07'}, 'Please select the desired participant');
-if strcmp(participant, 'CRS02b')
+participant = inputdialog({'P2', 'P3'}, 'Please select the desired participant');
+if strcmp(participant, 'P2')
     load('all_resps_notnorm.mat') %all intensity responses
     load('chans.mat') %channel labels
     load('percept_ch_all.mat') %all quality responses
@@ -13,7 +13,7 @@ if strcmp(participant, 'CRS02b')
     [data, vector_3D, sig_chs] = rmv_chans(data, vector_3D, unq_chans, non_sig_chs);
     initial_centers = [vector_3D(sig_chs==13,:); vector_3D(sig_chs==19,:); vector_3D(sig_chs==2,:)]; %starting coordinates
 else
-    load('CRS07_respsandchans.mat') %all intensity responses and channel labels
+    load('P3_respsandchans.mat') %all intensity responses and channel labels
     num_clust = 2;
     non_sig_chs = [52];
     data = resp;
@@ -30,7 +30,7 @@ end
 plot_clusters(vector_3D, idx, participant)
 
 %% cluster based on perceptual qualities - only have data for this in CRS02b
-if strcmp(participant, 'CRS02b')
+if strcmp(participant, 'P2')
     %use percepts to cluster
     percept_ch_all = [percept_ch_20, percept_ch_100, percept_ch_300];
     percept_ch_all = percept_ch_all(sig_chs,:);
