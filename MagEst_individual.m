@@ -105,6 +105,3 @@ for curr_ch = 1:length(sig_chans)
         [p(curr_freq,curr_ch)] = friedman(resps_org_2{curr_freq,curr_ch}, 1, 'off');
     end
 end
-%after accounting for multiple comparisons, h will tell you if there are
-%significant differences
-[h crit_p] = fdr_bh(p);
