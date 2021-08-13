@@ -2,6 +2,8 @@
 
 # The following is also available as a Word file on the Git
 
+# This data and code correspondes to results published in Hughes, Christopher L., et al. "Perception of microstimulation frequency in human somatosensory cortex." Elife 10 (2021): e65128.
+
 All of this code was run in MATLAB 2019b. 
 
 Always change the directory to the folder that contains the code and data (i.e. “cd(*Insert location on computer where you put data and code*)”)
