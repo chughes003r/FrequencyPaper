@@ -2,7 +2,7 @@
 
 # The following is also available as a Word file on the Git
 
-# This data and code correspondes to results published in Hughes, Christopher L., et al. "Perception of microstimulation frequency in human somatosensory cortex." Elife 10 (2021): e65128.
+# This data and code corresponds to results published in Hughes, Christopher L., et al. "Perception of microstimulation frequency in human somatosensory cortex." Elife 10 (2021): e65128.
 
 All of this code was run in MATLAB 2019b. 
 
